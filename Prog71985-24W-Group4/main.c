@@ -1,11 +1,16 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "task.h"
 
 int main(void) {
 
-	
 	TASK taskList[MAX_TASKS]; //initialize the list of tasks
+	TASK selection();
+
+	displayWelcomeMenu();
+	displayMenu();
 
 	//testing my functions
 	addTaskToList(taskList, "do math homework", 1, "multiplication homework");
