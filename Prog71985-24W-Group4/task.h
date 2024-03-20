@@ -1,6 +1,7 @@
 #pragma once
 #include <time.h>
 #include "state.h"
+#include <time.h> 
 #include <stdbool.h>
 #define MAXNAME 40
 #define MAXCONTENT 300
@@ -11,11 +12,11 @@ typedef struct task {
 	char name[MAXNAME];
 	int priorityLevel;
 	char content[MAXCONTENT];
-	//STATE state; //commented out until these are built
-	//time_t time;
+	STATE state;
+	time_t deadLine;
 }TASK;
 
-TASK createTask(char name[MAXNAME], int priorityLevel, char content[MAXCONTENT]);//, STATE state, time_t time);
+TASK createTask(char name[MAXNAME], int priorityLevel, char content[MAXCONTENT], time_t date);//, STATE state, time_t time);
 
 void addTaskToList(TASK taskList[], char name[MAXNAME], int priorityLevel, char content[MAXCONTENT]);// , STATE state, time_t time);
 
