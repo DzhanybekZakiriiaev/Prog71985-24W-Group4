@@ -14,6 +14,21 @@ TASK createTask(char name[MAXNAME], int priorityLevel, char content[MAXCONTENT])
 	return t;
 }
 
+void PrintTask(TASK t) {
+	printf("Task: %s\n", t.name);
+	printf("Priority Level: %d\n", t.priorityLevel);
+	if (strcmp(t.content, "")) { //check whether content is empty or not
+		printf("Details: %s\n", t.content);
+	}
+	//we can print more task properties as we create them (state, time, etc)
+}
+
+void DisposeTask(TASK t) {
+	// nothing to be done yet? 
+}
+
+
+//-------KEEPING THESE FUNCTIONS HERE FOR NOW UNTIL WE MOVE THEM-------//
 void addTaskToList(TASK taskList[], char name[MAXNAME], int priorityLevel, char content[MAXCONTENT]) {// , STATE state, time_t time) {
 	TASK newTask = createTask(name, priorityLevel, content);// , state, time);
 	for (int index = 0; index < MAX_TASKS; index++) {
@@ -22,13 +37,13 @@ void addTaskToList(TASK taskList[], char name[MAXNAME], int priorityLevel, char 
 			printf("index:%d\ntask: %s\n", index, taskList[index].name);//for debugging
 			return;
 		}
-	}	
+	}
 }
 
 void deleteTaskFromList(TASK taskList[], char taskToDelete[MAXNAME]) {
 	for (int index = 0; index < MAX_TASKS; index++) {
 		if (strcmp(taskList[index].name, taskToDelete)) { //finds the correct task to delete by comparing names
-			taskList[index].isEmpty = 1; 
+			taskList[index].isEmpty = 1;
 			strcpy(taskList[index].name, "");//set all values to empty
 			taskList[index].priorityLevel = 0;
 			strcpy(taskList[index].content, "");
