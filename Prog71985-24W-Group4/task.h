@@ -15,7 +15,11 @@ typedef struct task {
 	//time_t time;
 }TASK;
 
-TASK createTask(char name[MAXNAME], int priorityLevel, char content[MAXCONTENT]);//, STATE state, time_t time);
+TASK CreateTask(char name[MAXNAME], int priorityLevel, char content[MAXCONTENT]);//, STATE state, time_t time);
+
+TASK CopyTask(TASK src);
+
+bool CompareTask(TASK lhs, TASK rhs);
 
 void PrintTask(TASK t);
 
@@ -23,8 +27,8 @@ void DisposeTask(TASK t);
 
 
 //-------KEEPING THESE FUNCTIONS HERE FOR NOW UNTIL WE MOVE THEM-------//
-void addTaskToList(TASK taskList[], char name[MAXNAME], int priorityLevel, char content[MAXCONTENT]);// , STATE state, time_t time);
-
-void deleteTaskFromList(TASK taskList[], char taskToDelete[MAXNAME]);
-
-void updateTaskFromList(TASK taskList[], char taskToUpdate[MAXNAME], char newName[MAXNAME], int newPriorityLevel, char newContent[MAXCONTENT]);
+//void addTaskToList(TASK taskList[], char name[MAXNAME], int priorityLevel, char content[MAXCONTENT]);// , STATE state, time_t time);
+//
+//void deleteTaskFromList(TASK taskList[], char taskToDelete[MAXNAME]);
+//
+//void updateTaskFromList(TASK taskList[], char taskToUpdate[MAXNAME], char newName[MAXNAME], int newPriorityLevel, char newContent[MAXCONTENT]);
