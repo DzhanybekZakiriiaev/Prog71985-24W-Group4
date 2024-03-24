@@ -130,6 +130,7 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="menu.c" />
     <ClCompile Include="task.c" />
+    <ClCompile Include="TaskManager.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu.h" />
