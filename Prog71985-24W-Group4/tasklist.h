@@ -1,3 +1,5 @@
+// linked list of tasks(tasklist) interface
+// dzhanybek zakiriiaev - prog71985 - winter24 - taskManager
 #pragma once
 #include "task.h"
 

@@ -1,3 +1,5 @@
+// task implementation
+// dzhanybek zakiriiaev - andy guest - prog71985 - winter24 - taskManager
 #define _CRT_SECURE_NO_WARNINGS
 #include "task.h"
 #include <stdbool.h>
@@ -24,7 +26,7 @@ void PrintTask(TASK t) {
 }
 
 TASK CopyTask(TASK src) {
-	return CreateTask(src.name, src.priorityLevel, src.content);
+	return CreateTask(src.name, src.priorityLevel, src.content, src.state);
 }
 
 bool CompareTask(TASK lhs, TASK rhs) {

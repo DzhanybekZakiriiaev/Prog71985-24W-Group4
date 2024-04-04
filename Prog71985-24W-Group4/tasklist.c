@@ -1,4 +1,8 @@
+// linked list of tasks(tasklist) implementation
+// dzhanybek zakiriiaev - prog71985 - winter24 - taskManager
+#define _CRT_SECURE_NO_WARNINGS
 #include "task.h"
+#include <string.h>
 #include "tasklist.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -45,7 +49,9 @@ void Remove(PTASKLIST* list, TASK t) {
 		return;
 	}
 	else {
-		prev->next = current->next;
+		if (prev != NULL) {
+			prev->next = current->next;
+		}
 		free(current);
 	}
 }

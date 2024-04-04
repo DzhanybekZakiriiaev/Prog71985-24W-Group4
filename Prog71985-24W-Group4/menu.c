@@ -92,7 +92,7 @@ char getDisplayChoice() {
 void taskManager() {
     char taskInput;
     int invalidInputCount;
-
+   
     while (1) {
         int inputMain = getMenuChoice();
         invalidInputCount = 0;
