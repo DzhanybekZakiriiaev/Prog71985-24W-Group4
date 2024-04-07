@@ -2,6 +2,9 @@
 // dzhanybek zakiriiaev - prog71985 - winter24 - taskManager
 #pragma once
 #include "task.h"
+#define MIN_PRIORITYLEVEL 1
+#define MAX_PRIORITYLEVEL 10
+#define TASKLISTFILE "tasklist.txt"
 
 typedef struct tasklist {
 	TASK task;

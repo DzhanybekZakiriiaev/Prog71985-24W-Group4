@@ -27,10 +27,10 @@ void Display(PTASKLIST list) {
 	if (current == NULL) {
 		return;
 	}
-	do {
+	while (current != NULL) {
 		PrintTask(current->task);
 		current = current->next;
-	} while (current != NULL);
+	} 
 }
 
 void Remove(PTASKLIST* list, TASK t) {
