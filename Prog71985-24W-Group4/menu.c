@@ -1,5 +1,5 @@
 // menu - implementation
-// ceren askin - prog71985 - taskManager
+// ceren askin - andy guest - prog71985 - taskManager
 
 #define _CRT_SECURE_NO_WARNINGS
 #include "menu.h"
@@ -89,7 +89,7 @@ char getDisplayChoice() {
     return '\0';
 }
 
-void taskManager() {
+void taskManager(PTASKLIST tasklist) {
     char taskInput;
     int invalidInputCount;
    
@@ -111,12 +111,45 @@ void taskManager() {
                     switch (taskInput) {
                     case 'a':
                         printf("\nAdding a new task...\n");
+                        TASK task = CreateTask(
+                            getValidInt("\nEnter the priority level of the task (1-10): ", MIN_PRIORITYLEVEL, MAX_PRIORITYLEVEL), 
+                           "temp content",/* getValidStringInput("\nEnter the tasks details: ", MAXCONTENT),*/
+                            getValidState(),
+                            getValidStringInput("Enter the task name: ", MAXNAME));
+                        Add(&tasklist, task);
+                        printf("%s added to the tasklist. content: %s\n", task.name, task.content);
+                        SaveTaskListToDiskFile(tasklist, TASKLISTFILE);
                         break;
                     case 'b':
                         printf("\nDeleting a task...\n");
+                        TASK* taskToDelete = SearchTaskByName(tasklist, getValidStringInput("Enter the name of the task you want to delete: ", MAXSTRINGLENGTH));
+                        Remove(tasklist, *taskToDelete);
+                        SaveTaskListToDiskFile(tasklist, TASKLISTFILE); //save after completing delete
                         break;
                     case 'c':
                         printf("\nUpdating a task...\n");
+                        TASK* taskToUpdate = SearchTaskByName(tasklist, getValidStringInput("Enter the name of the task to update:", MAXSTRINGLENGTH));
+                        int updateChoice = getValidInt("Enter the number corresponding to the feild you'd like to update:\n1.Name\n2.Priority\n3.Content\n4.State", 1, 4);
+                        switch (updateChoice) {
+                        case 1: 
+                            //update the name feild
+                            strcpy(taskToUpdate->name, getValidStringInput("Enter the new name for the task: ", MAXNAME));
+                            break;
+                        case 2:
+                            //update the priority level
+                            taskToUpdate->priorityLevel = getValidInt("Enter the priority level of the task (1-10): ", MIN_PRIORITYLEVEL, MAX_PRIORITYLEVEL);
+                            break;
+                        case 3:
+                            //update the content
+                            strcpy(taskToUpdate->content, getValidStringInput("Enter the new content for the task: ", MAXCONTENT));
+                            break;
+                        case 4:
+                            //update the status 
+                            taskToUpdate->state = getValidState();
+                            break;
+                        }
+    
+                        SaveTaskListToDiskFile(tasklist, TASKLISTFILE); //save before exiting
                         break;
                     default:
                         printf("\nInvalid selection. Please choose a, b, c, or d.\n");
@@ -177,7 +210,7 @@ void taskManager() {
             printf("\nSEARCH TASK - Selected\n");
             break;
         case 4:
-            printf("\nExisting the program. Good bye!\n");
+            printf("\nExiting the program. Good bye!\n");
             return;
 
         default:

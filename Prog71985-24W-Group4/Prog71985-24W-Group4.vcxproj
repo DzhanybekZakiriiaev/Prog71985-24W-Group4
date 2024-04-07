@@ -127,12 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="getValidInput.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="menu.c" />
     <ClCompile Include="task.c" />
     <ClCompile Include="tasklist.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="getValidInput.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="task.h" />
