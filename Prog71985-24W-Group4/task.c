@@ -30,7 +30,7 @@ TASK CopyTask(TASK src) {
 }
 
 bool CompareTask(TASK lhs, TASK rhs) {
-	return (strcmp(lhs.name, rhs.name) && strcmp(lhs.content, rhs.content));
+	return (strcmp(lhs.name, rhs.name) == 0 && strcmp(lhs.content, rhs.content)== 0); //added ==0 for correct string comparison 
 }
 
 void DisposeTask(TASK t) {

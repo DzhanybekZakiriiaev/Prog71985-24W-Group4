@@ -12,9 +12,12 @@ char* getValidStringInput(char* prompt, int maxLength) {
     }
     fgets(stringArray, maxLength, stdin); 
     size_t length = strlen(stringArray); //length of string stored in stringArray not inc \0 (null terminator)
-    if (stringArray[length - 1] == '\n') //check if the last char in the string is a \n
-        stringArray[length - 1] = '\0'; //if it is \n, replace with \0 (to remove \n)
-    while (getchar() != '\n');
+    if (stringArray[length - 1] == '\n') {//check if the last char in the string is a \n
+        stringArray[length - 1] = '\0';//if it is \n, replace with \0 (to remove \n)
+    }
+    else {
+        while (getchar() != '\n');
+    }
     return stringArray;
 }
 

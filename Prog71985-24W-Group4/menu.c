@@ -123,8 +123,14 @@ void taskManager(PTASKLIST tasklist) {
                     case 'b':
                         printf("\nDeleting a task...\n");
                         TASK* taskToDelete = SearchTaskByName(tasklist, getValidStringInput("Enter the name of the task you want to delete: ", MAXSTRINGLENGTH));
-                        Remove(tasklist, *taskToDelete);
-                        SaveTaskListToDiskFile(tasklist, TASKLISTFILE); //save after completing delete
+                        if (taskToDelete == NULL) {
+                            printf("Could not find a task by that name. Please try again.\n");
+                        }
+                        else {
+                            Remove(tasklist, *taskToDelete);
+                            SaveTaskListToDiskFile(tasklist, TASKLISTFILE); //save after completing delete
+                        }
+
                         break;
                     case 'c':
                         printf("\nUpdating a task...\n");
