@@ -97,8 +97,7 @@ PTASKLIST ReadTaskListFromDiskFile(char* filename) {
 	PTASKLIST list = NULL;
 	FILE* fp = fopen(filename, "r");
 	if (fp == NULL) {
-		SaveTaskListToDiskFile(list, filename);
-		return (PTASKLIST)NULL;
+		return list;
 	}
 	TASK t = {0};
 	char line[MAXLINE] = {0};
@@ -120,13 +119,11 @@ PTASKLIST ReadTaskListFromDiskFile(char* filename) {
 			}
 			else {
 				fprintf(stderr, "Error reading content.\n");
-				exit(EXIT_FAILURE);
 			}
 			Add(&list, t);
 		}
 		else {
 			fprintf(stderr, "Error parsing data from the file.\n");
-			exit(EXIT_FAILURE);
 		}
 	}
 
