@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h> //for strcpy and memcpy
 
-TASK CreateTask(int priorityLevel, char content[MAXCONTENT], STATE state, char name[MAXNAME]) {//, time_t time) {
+TASK CreateTask(int priorityLevel,  STATE state, char content[MAXCONTENT],char name[MAXNAME]) {//, time_t time) {
 	TASK t;
 	strcpy(t.name, name);
 	t.priorityLevel = priorityLevel;
@@ -26,7 +26,7 @@ void PrintTask(TASK t) {
 }
 
 TASK CopyTask(TASK src) {
-	return CreateTask(src.priorityLevel, src.content, src.state, src.name);
+	return CreateTask(src.priorityLevel, src.state,  src.content,src.name);
 }
 
 bool CompareTask(TASK lhs, TASK rhs) {

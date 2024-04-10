@@ -49,3 +49,20 @@ enum state getValidState() {
     }
     
 }
+ 
+char* getValidTaskName(PTASKLIST tasklist, char* prompt, int maxLength) { //task name cannot contain spaces
+    bool invalidName;
+    char* taskname;
+    do {
+        invalidName = 0; 
+        taskname = getValidStringInput(prompt, maxLength);
+        for (int stringIndex = 0; stringIndex < strlen(taskname); stringIndex++) {
+            if (taskname[stringIndex] == ' ') {
+                printf("The name of the task cannot contain spaces. Please try again.\n");
+                invalidName = 1;
+                continue; //loop again, to ask for new name
+            }
+        }
+    } while (invalidName);
+    return taskname;
+}

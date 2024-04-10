@@ -1,8 +1,18 @@
-lalalal 10 in_progress
+efe 4 in_progress
+433
+names 2 not_started
+
+redo 2 not_started
 temp content
-newtask 4 in_progress
+laundry 3 not_started
 temp content
-OLDTASK 4 in_progress
-NONONONO
-newnewtask 10 closed
+trash 3 closed
 temp content
+trash 3 not_started
+temp content
+water 4 not_started
+temp content
+dishes 3 not_started
+
+teteete 4 not_started
+these are the details
