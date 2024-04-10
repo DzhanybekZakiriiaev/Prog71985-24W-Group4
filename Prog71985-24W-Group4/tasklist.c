@@ -30,6 +30,7 @@ void Display(PTASKLIST list) {
 	while (current != NULL) {
 		PrintTask(current->task);
 		current = current->next;
+		printf("\n");
 	} 
 }
 
