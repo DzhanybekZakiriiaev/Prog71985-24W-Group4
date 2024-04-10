@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "state.h"
+#include "tasklist.h"
 #define MAXSTRINGLENGTH 300
 
 //andy guest - prog71985 - taskManager
@@ -11,5 +12,4 @@
 char* getValidStringInput(char* prompt, int maxLength);
 int getValidInt(char* prompt, int minValue, int maxValue);
 enum state getValidState();
-
-
+char* getValidTaskName(PTASKLIST tasklist, char* prompt, int maxLength);//task name cannot contain spaces or be same as another task

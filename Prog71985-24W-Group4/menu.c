@@ -116,18 +116,26 @@ void taskManager() {
                     switch (taskInput) {
                     case 'a':
                         printf("\nAdding a new task...\n");
+                        char* taskname;
+                        do{
+                            taskname = getValidTaskName(tasklist, "Enter the task name: ", MAXNAME);
+                            if (SearchTaskByName(tasklist, taskname) != NULL) {
+                                printf("A task by that name already exists. Please try again and use a different name.\n");
+                            }//keep looping until valid, unique name is entered
+                        } while (SearchTaskByName(tasklist, taskname) != NULL);
+
                         TASK task = CreateTask(
                             getValidInt("\nEnter the priority level of the task (1-10): ", MIN_PRIORITYLEVEL, MAX_PRIORITYLEVEL), 
-                           "temp content",/* getValidStringInput("\nEnter the tasks details: ", MAXCONTENT),*/
-                            getValidState(),
-                            getValidStringInput("Enter the task name: ", MAXNAME));
+                            getValidState(), 
+                            getValidStringInput("\nEnter the tasks details: ", MAXCONTENT),
+                            taskname);
                         Add(&tasklist, task);
                         printf("%s added to the tasklist. content: %s\n", task.name, task.content);
                         SaveTaskListToDiskFile(tasklist, TASKLISTFILE);
                         break;
                     case 'b':
                         printf("\nDeleting a task...\n");
-                        TASK* taskToDelete = SearchTaskByName(tasklist, getValidStringInput("Enter the name of the task you want to delete: ", MAXSTRINGLENGTH));
+                        TASK* taskToDelete = SearchTaskByName(tasklist, getValidTaskName(tasklist, "Enter the name of the task you want to delete: ", MAXSTRINGLENGTH));
                         if (taskToDelete == NULL) {
                             printf("Could not find a task by that name. Please try again.\n");
                         }
@@ -138,12 +146,12 @@ void taskManager() {
                         break;
                     case 'c':
                         printf("\nUpdating a task...\n");
-                        TASK* taskToUpdate = SearchTaskByName(tasklist, getValidStringInput("Enter the name of the task to update:", MAXSTRINGLENGTH));
+                        TASK* taskToUpdate = SearchTaskByName(tasklist, getValidTaskName(tasklist, "Enter the name of the task to update:", MAXSTRINGLENGTH));
                         int updateChoice = getValidInt("Enter the number corresponding to the feild you'd like to update:\n1.Name\n2.Priority\n3.Content\n4.State", 1, 4);
                         switch (updateChoice) {
                         case 1: 
                             //update the name feild
-                            strcpy(taskToUpdate->name, getValidStringInput("Enter the new name for the task: ", MAXNAME));
+                            strcpy(taskToUpdate->name, getValidTaskName(tasklist, "Enter the new name for the task: ", MAXNAME));
                             break;
                         case 2:
                             //update the priority level
@@ -219,7 +227,7 @@ void taskManager() {
         }
         case 3:
             printf("\nSEARCH TASK - Selected\n");
-            TASK* taskToSearch = SearchTaskByName(tasklist, getValidStringInput("Enter the name of the task you want to delete: ", MAXSTRINGLENGTH));
+            TASK* taskToSearch = SearchTaskByName(tasklist, getValidTaskName(tasklist, "Enter the name of the task you want to search for: ", MAXSTRINGLENGTH));
             if (taskToSearch == NULL) {
                 printf("Could not find a task by that name. Please try again.\n");
             }
