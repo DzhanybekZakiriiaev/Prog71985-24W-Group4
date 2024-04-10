@@ -60,7 +60,7 @@ void Remove(PTASKLIST* list, TASK t) {
 TASK* SearchTaskByName(PTASKLIST list, char* name) {
 	PTASKLIST current = list;
 	while (current != NULL) {
-		if (strcmp(current->task.name, name)) {
+		if (strcmp(current->task.name, name) == 0) { //changed to ==0 to check for if they are the same.
 			return &(current->task);
 		}
 		current = current->next;
