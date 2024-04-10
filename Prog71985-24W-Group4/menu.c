@@ -2,10 +2,13 @@
 // ceren askin - andy guest - prog71985 - taskManager
 
 #define _CRT_SECURE_NO_WARNINGS
-#include "menu.h"
+#include "tasklist.h"
+#include "task.h"
+#include "state.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "getValidInput.h"
 
 #define MAXSIZE 10
 
@@ -89,7 +92,9 @@ char getDisplayChoice() {
     return '\0';
 }
 
-void taskManager(PTASKLIST tasklist) {
+void taskManager() {
+    PTASKLIST tasklist = NULL;
+    tasklist = ReadTaskListFromDiskFile(TASKLISTFILE);
     char taskInput;
     int invalidInputCount;
    
@@ -127,7 +132,7 @@ void taskManager(PTASKLIST tasklist) {
                             printf("Could not find a task by that name. Please try again.\n");
                         }
                         else {
-                            Remove(tasklist, *taskToDelete);
+                            Remove(&tasklist, *taskToDelete);
                             SaveTaskListToDiskFile(tasklist, TASKLISTFILE); //save after completing delete
                         }
                         break;
@@ -188,13 +193,14 @@ void taskManager(PTASKLIST tasklist) {
 
                     switch (displayChoice) {
                     case 'a':
-                        printf("Displaying single task...\n");
+                        printf("Displaying single task...\n\n");
                         break;
                     case 'b':
-                        printf("Displaying range task...\n");
+                        printf("Displaying range task...\n\n");
                         break;
                     case 'c':
-                        printf("Displaying all tasks...\n");
+                        printf("Displaying all tasks...\n\n");
+                        Display(tasklist);
                         break;
                     }
                     invalidInputCount = 0;
@@ -223,6 +229,7 @@ void taskManager(PTASKLIST tasklist) {
             break;
         case 4:
             printf("\nExiting the program. Good bye!\n");
+            Dispose(&tasklist);
             return;
 
         default:

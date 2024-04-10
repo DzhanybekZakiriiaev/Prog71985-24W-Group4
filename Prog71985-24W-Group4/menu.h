@@ -8,4 +8,4 @@ void displayWelcomeMenu();
 int getMenuChoice();
 char getTaskChoice();
 char getDisplayChoice();
-void taskManager(PTASKLIST tasklist);
+void taskManager();
