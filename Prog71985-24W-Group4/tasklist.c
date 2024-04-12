@@ -2,6 +2,7 @@
 // dzhanybek zakiriiaev - ceren askin - prog71985 - winter24 - taskManager
 #define _CRT_SECURE_NO_WARNINGS
 #include "task.h"
+#include <string.h>
 #include "tasklist.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,10 +29,11 @@ void Display(PTASKLIST list) {
 	if (current == NULL) {
 		return;
 	}
-	do {
+	while (current != NULL) {
 		PrintTask(current->task);
 		current = current->next;
-	} while (current != NULL);
+		printf("\n");
+	} 
 }
 
 void Remove(PTASKLIST* list, TASK t) {
@@ -50,7 +52,9 @@ void Remove(PTASKLIST* list, TASK t) {
 		return;
 	}
 	else {
-		prev->next = current->next;
+		if (prev != NULL) {
+			prev->next = current->next;
+		}
 		free(current);
 	}
 }
@@ -58,7 +62,7 @@ void Remove(PTASKLIST* list, TASK t) {
 TASK* SearchTaskByName(PTASKLIST list, char* name) {
 	PTASKLIST current = list;
 	while (current != NULL) {
-		if (strcmp(current->task.name, name)) {
+		if (strcmp(current->task.name, name) == 0) { //changed to ==0 to check for if they are the same.
 			return &(current->task);
 		}
 		current = current->next;
@@ -96,8 +100,7 @@ PTASKLIST ReadTaskListFromDiskFile(char* filename) {
 	PTASKLIST list = NULL;
 	FILE* fp = fopen(filename, "r");
 	if (fp == NULL) {
-		SaveTaskListToDiskFile(list, filename);
-		return (PTASKLIST)NULL;
+		return list;
 	}
 	TASK t = {0};
 	char line[MAXLINE] = {0};
@@ -119,13 +122,11 @@ PTASKLIST ReadTaskListFromDiskFile(char* filename) {
 			}
 			else {
 				fprintf(stderr, "Error reading content.\n");
-				exit(EXIT_FAILURE);
 			}
 			Add(&list, t);
 		}
 		else {
 			fprintf(stderr, "Error parsing data from the file.\n");
-			exit(EXIT_FAILURE);
 		}
 	}
 
