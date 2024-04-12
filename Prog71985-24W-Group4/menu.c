@@ -141,6 +141,7 @@ void taskManager() {
                         }
                         else {
                             Remove(&tasklist, *taskToDelete);
+                            printf("Deleted from tasklist.");
                             SaveTaskListToDiskFile(tasklist, TASKLISTFILE); //save after completing delete
                         }
                         break;

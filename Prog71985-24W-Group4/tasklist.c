@@ -1,5 +1,5 @@
 // linked list of tasks(tasklist) implementation
-// dzhanybek zakiriiaev - prog71985 - winter24 - taskManager
+// dzhanybek zakiriiaev - ceren askin - prog71985 - winter24 - taskManager
 #define _CRT_SECURE_NO_WARNINGS
 #include "task.h"
 #include <string.h>
@@ -31,7 +31,7 @@ void Display(PTASKLIST list) {
 		PrintTask(current->task);
 		current = current->next;
 		printf("\n");
-	} 
+	}
 }
 
 void Remove(PTASKLIST* list, TASK t) {
@@ -100,9 +100,9 @@ PTASKLIST ReadTaskListFromDiskFile(char* filename) {
 	if (fp == NULL) {
 		return list;
 	}
-	TASK t = {0};
-	char line[MAXLINE] = {0};
-	char state[MAXNAME] = {0};
+	TASK t = { 0 };
+	char line[MAXLINE] = { 0 };
+	char state[MAXNAME] = { 0 };
 	while (fgets(line, sizeof(line), fp) != NULL) {
 		if (sscanf(line, "%s %d %s", t.name, &t.priorityLevel, state) == 3) {
 			if (strcmp(state, "not_started") == 0) {
@@ -132,6 +132,74 @@ PTASKLIST ReadTaskListFromDiskFile(char* filename) {
 	return list;
 }
 
+void DisplayFinishedTasks(PTASKLIST tasklist) {
+	printf("Finished Tasks:\n\n");
+	PTASKLIST current = tasklist;
+	while (current != NULL) {
+		if (current->task.state == CLOSED) {
+			PrintTask(current->task);
+			printf("\n");
+		}
+		current = current->next;
+	}
+}
+
+void DisplayTasksInProgress(PTASKLIST tasklist) {
+	printf("In Progress Tasks:\n\n");
+	PTASKLIST current = tasklist;
+	while (current != NULL) {
+		if (current->task.state == IN_PROGRESS) {
+			PrintTask(current->task);
+			printf("\n");
+		}
+		current = current->next;
+	}
+}
+
+void DisplayTasksNotStarted(PTASKLIST tasklist) {
+	printf("Not Started Tasks:\n\n");
+	PTASKLIST current = tasklist;
+	while (current != NULL) {
+		if (current->task.state == NOT_STARTED) {
+			PrintTask(current->task);
+			printf("\n");
+		}
+		current = current->next;
+	}
+}
+
+void DisplayTasksByPriority(PTASKLIST tasklist) {
+	printf("Displaying all tasks by priority:\n\n");
+	SortTasksByPriority(tasklist);
+
+	PTASKLIST current = tasklist;
+	while (current != NULL) {
+		PrintTask(current->task);
+		printf("\n");
+		current = current->next;
+	}
+}
+
+void SortTasksByPriority(PTASKLIST list) {
+	if (list == NULL) {
+		fprintf(stderr, "Error: List is empty.\n");
+		return;
+	}
+	int swap;
+	do {
+		swap = 0;
+		PTASKLIST current = list;
+		while (current->next != NULL) {
+			if (current->task.priorityLevel < current->next->task.priorityLevel) {
+				int tempPriority = current->task.priorityLevel;
+				current->task.priorityLevel = current->next->task.priorityLevel;
+				current->next->task.priorityLevel = tempPriority;
+				swap = 1;
+			}
+			current = current->next;
+		}
+	} while (swap);
+}
 
 void Dispose(PTASKLIST* list) {
 	PTASKLIST current = *list;
