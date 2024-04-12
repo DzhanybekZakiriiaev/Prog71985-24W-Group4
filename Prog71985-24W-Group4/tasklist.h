@@ -1,15 +1,17 @@
 // linked list of tasks(tasklist) interface
-// dzhanybek zakiriiaev - prog71985 - winter24 - taskManager
+// dzhanybek zakiriiaev - ceren askin - prog71985 - winter24 - taskManager
 #pragma once
 #include "task.h"
 #define MIN_PRIORITYLEVEL 1
-#define MAX_PRIORITYLEVEL 10
+#define MAX_PRIORITYLEVEL 5
 #define TASKLISTFILE "tasklist.txt"
 
 typedef struct tasklist {
 	TASK task;
 	struct tasklist* next;
 } TASKLIST, *PTASKLIST;
+
+extern PTASKLIST taskList;
 
 void Add(PTASKLIST* list, TASK t);
 
@@ -24,3 +26,9 @@ TASK* SearchTaskByName(PTASKLIST, char*);
 PTASKLIST ReadTaskListFromDiskFile(char* filename);
 
 void SaveTaskListToDiskFile(PTASKLIST list, char* filename);
+
+
+void DisplayFinishedTasks();
+void DisplayTasksInProgress();
+void DisplayTasksByPriority();
+void SortTasksByPriority(PTASKLIST list);
