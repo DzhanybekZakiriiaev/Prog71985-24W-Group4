@@ -200,9 +200,30 @@ void taskManager() {
                     printf("****************************\n");
 
                     switch (displayChoice) {
-                    case 'a':
-
-                        printf("Displaying single task..\n\n");
+                   case 'a':
+                        printf("Displaying single task...\n\n");
+                        PTASKLIST tempList = tasklist;
+                        if (tempList == NULL) {
+                            printf("No tasks to display");
+                            break;
+                        }
+                        int userChoice; 
+                        PrintTask(tempList->task);
+                        do {
+                            userChoice = getValidInt("To go to next task press 1. To exit press 2.", 1, 2);
+                            if(userChoice == 2){
+                                break;
+                            }
+                            else if (tempList->next != NULL && userChoice == 1) {
+                                tempList = tempList->next;
+                                PrintTask(tempList->task);
+                            }
+                            else {
+                                printf("\nNo more tasks in the list.\n");
+                                break;
+                            }
+                        } while (userChoice != 2);
+                    
                         break;
                     case 'b': {
                         printf("Please select the list you want to view\n");
