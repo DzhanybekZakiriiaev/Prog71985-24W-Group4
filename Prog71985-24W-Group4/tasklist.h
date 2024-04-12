@@ -9,7 +9,7 @@
 typedef struct tasklist {
 	TASK task;
 	struct tasklist* next;
-} TASKLIST, *PTASKLIST;
+} TASKLIST, * PTASKLIST;
 
 void Add(PTASKLIST* list, TASK t);
 

@@ -31,7 +31,7 @@ void Display(PTASKLIST list) {
 		PrintTask(current->task);
 		current = current->next;
 		printf("\n");
-	} 
+	}
 }
 
 void Remove(PTASKLIST* list, TASK t) {
@@ -100,9 +100,9 @@ PTASKLIST ReadTaskListFromDiskFile(char* filename) {
 	if (fp == NULL) {
 		return list;
 	}
-	TASK t = {0};
-	char line[MAXLINE] = {0};
-	char state[MAXNAME] = {0};
+	TASK t = { 0 };
+	char line[MAXLINE] = { 0 };
+	char state[MAXNAME] = { 0 };
 	while (fgets(line, sizeof(line), fp) != NULL) {
 		if (sscanf(line, "%s %d %s", t.name, &t.priorityLevel, state) == 3) {
 			if (strcmp(state, "not_started") == 0) {
@@ -210,3 +210,4 @@ void Dispose(PTASKLIST* list) {
 		free(tmp);
 	}
 }
+
