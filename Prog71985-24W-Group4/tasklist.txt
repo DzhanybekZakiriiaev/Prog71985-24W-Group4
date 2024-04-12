@@ -6,3 +6,5 @@ testing_add 4 closed
 new_task
 lalalal 4 in_progress
 my_day_was_fine
+NewNew 5 closed
+New_task_for_checking_the_code

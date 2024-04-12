@@ -1,5 +1,6 @@
 // state of task enum
-// dzhanybek zakiriiaev - prog71985 - winter24 - taskManager
+// ceren askin - andy guest - dzhanybek zakiriiaev - prog71985 - taskManager - group4
+// principal editor - dzhanybek zakiriiaev
 #pragma once
 typedef enum state
 {

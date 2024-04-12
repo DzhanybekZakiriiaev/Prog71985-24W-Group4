@@ -1,5 +1,6 @@
 // linked list of tasks(tasklist) interface
-// dzhanybek zakiriiaev - ceren askin - prog71985 - winter24 - taskManager
+// ceren askin - andy guest - dzhanybek zakiriiaev - prog71985 - taskManager - group4
+// principal editor - dzhanybek zakiriiaev
 #pragma once
 #include "task.h"
 #define MIN_PRIORITYLEVEL 1

@@ -1,5 +1,6 @@
 // task implementation
-// andy guest - dzhanybek zakiriiaev  - prog71985 - winter24 - taskManager
+// ceren askin - andy guest - dzhanybek zakiriiaev - prog71985 - taskManager - group4
+// principal editor - andy guest - dzhanybek zakiriiaev
 #define _CRT_SECURE_NO_WARNINGS
 #include "task.h"
 #include <stdbool.h>

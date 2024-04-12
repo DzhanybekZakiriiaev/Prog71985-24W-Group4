@@ -1,6 +1,7 @@
+// ceren askin - andy guest - dzhanybek zakiriiaev - prog71985 - taskManager - group4
+// input validation implementation
+// principal editor - andy guest
 #include "getValidInput.h"
-
-//andy guest - prog71985 - taskManager
 
 //gets string from user and allocates memory for it with malloc
 char* getValidStringInput(char* prompt, int maxLength) {
@@ -52,16 +53,12 @@ enum state getValidState() {
 }
  
 char* getValidText(char* prompt, int maxLength) { //task name cannot contain spaces
-    bool invalidName;
     char* taskname;
-    do {
-        invalidName = 0; 
-        taskname = getValidStringInput(prompt, maxLength);
-        for (int stringIndex = 0; stringIndex < strlen(taskname); stringIndex++) {
-            if (taskname[stringIndex] == ' ') {
+    taskname = getValidStringInput(prompt, maxLength);
+    for (int stringIndex = 0; stringIndex < strlen(taskname); stringIndex++) {
+        if (taskname[stringIndex] == ' ') {
                 taskname[stringIndex] = '_';
-            }
         }
-    } while (invalidName);
+    }
     return taskname;
 }

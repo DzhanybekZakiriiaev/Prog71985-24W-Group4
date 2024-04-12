@@ -1,5 +1,6 @@
 // task interface
-// dzhanybek zakiriiaev - andy guest - prog71985 - winter24 - taskManager
+// ceren askin - andy guest - dzhanybek zakiriiaev - prog71985 - taskManager - group4
+// principal editor - andy guest - dzhanybek zakiriiaev
 #pragma once
 #include <time.h>
 #include "state.h"

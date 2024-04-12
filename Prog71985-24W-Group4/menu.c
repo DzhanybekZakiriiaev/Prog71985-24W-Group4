@@ -1,6 +1,6 @@
 // menu - implementation
-// ceren askin - andy guest - prog71985 - taskManager
-
+// ceren askin - andy guest - dzhanybek zakiriiaev - prog71985 - taskManager - group4
+// principal editors - ceren askin - andy guest
 #define _CRT_SECURE_NO_WARNINGS
 #include "tasklist.h"
 #include "task.h"
@@ -147,27 +147,31 @@ void taskManager() {
                     case 'c':
                         printf("\nUpdating a task...\n");
                         TASK* taskToUpdate = SearchTaskByName(tasklist, getValidText("Enter the name of the task to update: ", MAXSTRINGLENGTH));
-                        int updateChoice = getValidInt("\n1.Name\n2.Priority\n3.Content\n4.State\nEnter the number corresponding to the feild you'd like to update: ", 1, 4);
-                        switch (updateChoice) {
-                        case 1: 
-                            //update the name feild
-                            strcpy(taskToUpdate->name, getValidText("Enter the new name for the task: ", MAXNAME));
-                            break;
-                        case 2:
-                            //update the priority level
-                            taskToUpdate->priorityLevel = getValidInt("Enter the priority level of the task (1-5): ", MIN_PRIORITYLEVEL, MAX_PRIORITYLEVEL);
-                            break;
-                        case 3:
-                            //update the content
-                            strcpy(taskToUpdate->content, getValidStringInput("Enter the new content for the task: ", MAXCONTENT));
-                            break;
-                        case 4:
-                            //update the status 
-                            taskToUpdate->state = getValidState();
-                            break;
+                        if (taskToUpdate == NULL) {
+                            printf("Could not find a task by that name. Please try again.\n");
                         }
-    
-                        SaveTaskListToDiskFile(tasklist, TASKLISTFILE); //save before exiting
+                        else {
+                            int updateChoice = getValidInt("\n1.Name\n2.Priority\n3.Content\n4.State\nEnter the number corresponding to the feild you'd like to update: ", 1, 4);
+                            switch (updateChoice) {
+                            case 1:
+                                //update the name feild
+                                strcpy(taskToUpdate->name, getValidText("Enter the new name for the task: ", MAXNAME));
+                                break;
+                            case 2:
+                                //update the priority level
+                                taskToUpdate->priorityLevel = getValidInt("Enter the priority level of the task (1-5): ", MIN_PRIORITYLEVEL, MAX_PRIORITYLEVEL);
+                                break;
+                            case 3:
+                                //update the content
+                                strcpy(taskToUpdate->content, getValidText("Enter the new content for the task: ", MAXCONTENT));
+                                break;
+                            case 4:
+                                //update the status 
+                                taskToUpdate->state = getValidState();
+                                break;
+                            }
+                            SaveTaskListToDiskFile(tasklist, TASKLISTFILE); //save before exiting
+                        }
                         break;
                     default:
                         printf("\033[31mInvalid selection. Please choose a, b, c, or d.\n\033[0m");

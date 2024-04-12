@@ -1,6 +1,7 @@
 #pragma once
 // menu - interface
-// ceren askin - prog71985 - taskManager
+// ceren askin - andy guest - dzhanybek zakiriiaev - prog71985 - taskManager - group4
+// principal editors - ceren askin - andy guest
 #include "getValidInput.h"
 #include "tasklist.h"
 

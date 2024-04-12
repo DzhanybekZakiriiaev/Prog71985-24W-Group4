@@ -1,5 +1,6 @@
 // linked list of tasks(tasklist) implementation
-// dzhanybek zakiriiaev - ceren askin - prog71985 - winter24 - taskManager
+// ceren askin - andy guest - dzhanybek zakiriiaev - prog71985 - taskManager - group4
+// principal editor - dzhanybek zakiriiaev
 #define _CRT_SECURE_NO_WARNINGS
 #include "task.h"
 #include <string.h>
