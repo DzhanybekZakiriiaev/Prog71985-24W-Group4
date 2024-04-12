@@ -11,8 +11,6 @@ typedef struct tasklist {
 	struct tasklist* next;
 } TASKLIST, *PTASKLIST;
 
-extern PTASKLIST taskList;
-
 void Add(PTASKLIST* list, TASK t);
 
 void Display(PTASKLIST list);
@@ -27,8 +25,12 @@ PTASKLIST ReadTaskListFromDiskFile(char* filename);
 
 void SaveTaskListToDiskFile(PTASKLIST list, char* filename);
 
+void DisplayFinishedTasks(PTASKLIST taskList);
 
-void DisplayFinishedTasks();
-void DisplayTasksInProgress();
-void DisplayTasksByPriority();
+void DisplayTasksInProgress(PTASKLIST taskList);
+
+void DisplayTasksNotStarted(PTASKLIST tasklist);
+
+void DisplayTasksByPriority(PTASKLIST taskList);
+
 void SortTasksByPriority(PTASKLIST list);

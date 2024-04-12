@@ -8,8 +8,6 @@
 #include <stdlib.h>
 #define MAXLINE 300
 
-PTASKLIST taskList = NULL;
-
 void Add(PTASKLIST* list, TASK t) {
 	PTASKLIST newNode = (PTASKLIST)malloc(sizeof(TASKLIST));
 	if (newNode == NULL) {
@@ -134,10 +132,9 @@ PTASKLIST ReadTaskListFromDiskFile(char* filename) {
 	return list;
 }
 
-void DisplayFinishedTasks() {
-	extern PTASKLIST taskList;
+void DisplayFinishedTasks(PTASKLIST tasklist) {
 	printf("Finished Tasks:\n\n");
-	PTASKLIST current = taskList;
+	PTASKLIST current = tasklist;
 	while (current != NULL) {
 		if (current->task.state == CLOSED) {
 			PrintTask(current->task);
@@ -147,10 +144,9 @@ void DisplayFinishedTasks() {
 	}
 }
 
-void DisplayTasksInProgress() {
-	extern PTASKLIST taskList;
+void DisplayTasksInProgress(PTASKLIST tasklist) {
 	printf("In Progress Tasks:\n\n");
-	PTASKLIST current = taskList;
+	PTASKLIST current = tasklist;
 	while (current != NULL) {
 		if (current->task.state == IN_PROGRESS) {
 			PrintTask(current->task);
@@ -160,12 +156,23 @@ void DisplayTasksInProgress() {
 	}
 }
 
-void DisplayTasksByPriority() {
-	extern PTASKLIST taskList;
-	printf("Displaying all tasks by priority:\n\n");
-	SortTasksByPriority(taskList);
+void DisplayTasksNotStarted(PTASKLIST tasklist) {
+	printf("Not Started Tasks:\n\n");
+	PTASKLIST current = tasklist;
+	while (current != NULL) {
+		if (current->task.state == NOT_STARTED) {
+			PrintTask(current->task);
+			printf("\n");
+		}
+		current = current->next;
+	}
+}
 
-	PTASKLIST current = taskList;
+void DisplayTasksByPriority(PTASKLIST tasklist) {
+	printf("Displaying all tasks by priority:\n\n");
+	SortTasksByPriority(tasklist);
+
+	PTASKLIST current = tasklist;
 	while (current != NULL) {
 		PrintTask(current->task);
 		printf("\n");
