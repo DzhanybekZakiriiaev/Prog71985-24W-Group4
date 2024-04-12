@@ -156,7 +156,7 @@ void taskManager() {
                             break;
                         case 2:
                             //update the priority level
-                            taskToUpdate->priorityLevel = getValidInt("Enter the priority level of the task (1-10): ", MIN_PRIORITYLEVEL, MAX_PRIORITYLEVEL);
+                            taskToUpdate->priorityLevel = getValidInt("Enter the priority level of the task (1-5): ", MIN_PRIORITYLEVEL, MAX_PRIORITYLEVEL);
                             break;
                         case 3:
                             //update the content
@@ -255,17 +255,11 @@ void taskManager() {
                             break;
                         }
                         printf("****************************");
-
-                        printf("Displaying single task...\n\n");
-                        break;
-                    
-
                         break;
                     }
                     case 'c':
                         DisplayTasksByPriority();
                         printf("****************************");
-
                         break;
                     }
                     invalidInputCount = 0;
