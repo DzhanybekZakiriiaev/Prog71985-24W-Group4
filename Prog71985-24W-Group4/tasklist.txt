@@ -1,18 +1,20 @@
-efe 4 in_progress
-433
-names 2 not_started
+test 4 in_progress
+tes detail
+teteete 4 not_started
+these are the details
+dishes 3 not_started
 
-redo 2 not_started
-temp content
-laundry 3 not_started
-temp content
-trash 3 closed
+water 4 not_started
 temp content
 trash 3 not_started
 temp content
-water 4 not_started
+trash 3 closed
 temp content
-dishes 3 not_started
+laundry 3 not_started
+temp content
+redo 2 not_started
+temp content
+names 2 not_started
 
-teteete 4 not_started
-these are the details
+efe 4 in_progress
+433

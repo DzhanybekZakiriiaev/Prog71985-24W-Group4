@@ -147,26 +147,30 @@ void taskManager() {
                     case 'c':
                         printf("\nUpdating a task...\n");
                         TASK* taskToUpdate = SearchTaskByName(tasklist, getValidTaskName(tasklist, "Enter the name of the task to update:", MAXSTRINGLENGTH));
-                        int updateChoice = getValidInt("Enter the number corresponding to the feild you'd like to update:\n1.Name\n2.Priority\n3.Content\n4.State", 1, 4);
-                        switch (updateChoice) {
-                        case 1: 
-                            //update the name feild
-                            strcpy(taskToUpdate->name, getValidTaskName(tasklist, "Enter the new name for the task: ", MAXNAME));
-                            break;
-                        case 2:
-                            //update the priority level
-                            taskToUpdate->priorityLevel = getValidInt("Enter the priority level of the task (1-10): ", MIN_PRIORITYLEVEL, MAX_PRIORITYLEVEL);
-                            break;
-                        case 3:
-                            //update the content
-                            strcpy(taskToUpdate->content, getValidStringInput("Enter the new content for the task: ", MAXCONTENT));
-                            break;
-                        case 4:
-                            //update the status 
-                            taskToUpdate->state = getValidState();
-                            break;
+                        if (taskToUpdate == NULL) {
+                            printf("Could not find a task by that name. Please try again.\n");
                         }
-    
+                        else {
+                            int updateChoice = getValidInt("Enter the number corresponding to the feild you'd like to update:\n1.Name\n2.Priority\n3.Content\n4.State", 1, 4);
+                            switch (updateChoice) {
+                            case 1:
+                                //update the name feild
+                                strcpy(taskToUpdate->name, getValidTaskName(tasklist, "Enter the new name for the task: ", MAXNAME));
+                                break;
+                            case 2:
+                                //update the priority level
+                                taskToUpdate->priorityLevel = getValidInt("Enter the priority level of the task (1-10): ", MIN_PRIORITYLEVEL, MAX_PRIORITYLEVEL);
+                                break;
+                            case 3:
+                                //update the content
+                                strcpy(taskToUpdate->content, getValidStringInput("Enter the new content for the task: ", MAXCONTENT));
+                                break;
+                            case 4:
+                                //update the status 
+                                taskToUpdate->state = getValidState();
+                                break;
+                            }
+                        }   
                         SaveTaskListToDiskFile(tasklist, TASKLISTFILE); //save before exiting
                         break;
                     default:
@@ -202,6 +206,28 @@ void taskManager() {
                     switch (displayChoice) {
                     case 'a':
                         printf("Displaying single task...\n\n");
+                        PTASKLIST tempList = tasklist; //creating temporary list to cycle through
+                        if (tempList == NULL) {
+                            printf("No tasks to display");
+                            break;
+                        }
+                        int userChoice;
+                        PrintTask(tempList->task);//print first task in list
+                        do {
+                            userChoice = getValidInt("To go to next task press 1. To exit press 2.", 1, 2);
+                            if (userChoice == 2) {
+                                break;
+                            }
+                            else if (tempList->next != NULL && userChoice == 1) {
+                                tempList = tempList->next; //set list to ->next and print next task in list
+                                PrintTask(tempList->task);
+                            }
+                            else {
+                                printf("\nNo more tasks in the list.\n");//check if empty 
+                                break;
+                            }
+                        } while (userChoice != 2);
+
                         break;
                     case 'b':
                         printf("Displaying range task...\n\n");
