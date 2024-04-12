@@ -1,5 +1,5 @@
 // linked list of tasks(tasklist) implementation
-// dzhanybek zakiriiaev - prog71985 - winter24 - taskManager
+// dzhanybek zakiriiaev - ceren askin - prog71985 - winter24 - taskManager
 #define _CRT_SECURE_NO_WARNINGS
 #include "task.h"
 #include <string.h>
@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define MAXLINE 300
+
+PTASKLIST taskList = NULL;
 
 void Add(PTASKLIST* list, TASK t) {
 	PTASKLIST newNode = (PTASKLIST)malloc(sizeof(TASKLIST));
@@ -132,6 +134,65 @@ PTASKLIST ReadTaskListFromDiskFile(char* filename) {
 	return list;
 }
 
+void DisplayFinishedTasks() {
+	extern PTASKLIST taskList;
+	printf("Finished Tasks:\n\n");
+	PTASKLIST current = taskList;
+	while (current != NULL) {
+		if (current->task.state == CLOSED) {
+			PrintTask(current->task);
+			printf("\n");
+		}
+		current = current->next;
+	}
+}
+
+void DisplayTasksInProgress() {
+	extern PTASKLIST taskList;
+	printf("In Progress Tasks:\n\n");
+	PTASKLIST current = taskList;
+	while (current != NULL) {
+		if (current->task.state == IN_PROGRESS) {
+			PrintTask(current->task);
+			printf("\n");
+		}
+		current = current->next;
+	}
+}
+
+void DisplayTasksByPriority() {
+	extern PTASKLIST taskList;
+	printf("Displaying all tasks by priority:\n\n");
+	SortTasksByPriority(taskList);
+
+	PTASKLIST current = taskList;
+	while (current != NULL) {
+		PrintTask(current->task);
+		printf("\n");
+		current = current->next;
+	}
+}
+
+void SortTasksByPriority(PTASKLIST list) {
+	if (list == NULL) {
+		fprintf(stderr, "Error: List is empty.\n");
+		return;
+	}
+	int swap;
+	do {
+		swap = 0;
+		PTASKLIST current = list;
+		while (current->next != NULL) {
+			if (current->task.priorityLevel < current->next->task.priorityLevel) {
+				int tempPriority = current->task.priorityLevel;
+				current->task.priorityLevel = current->next->task.priorityLevel;
+				current->next->task.priorityLevel = tempPriority;
+				swap = 1;
+			}
+			current = current->next;
+		}
+	} while (swap);
+}
 
 void Dispose(PTASKLIST* list) {
 	PTASKLIST current = *list;
