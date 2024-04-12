@@ -30,6 +30,7 @@ int getValidInt(char* prompt, int minValue, int maxValue) {
         printf("\033[31mInvalid input. Please enter an number between %d and %d\n\033[0m", minValue, maxValue);
         printf("%s", prompt);
     }
+    while ((getchar()) != '\n');
     return input;
 }
 
@@ -50,7 +51,7 @@ enum state getValidState() {
     
 }
  
-char* getValidTaskName(PTASKLIST tasklist, char* prompt, int maxLength) { //task name cannot contain spaces
+char* getValidText(char* prompt, int maxLength) { //task name cannot contain spaces
     bool invalidName;
     char* taskname;
     do {
@@ -58,9 +59,7 @@ char* getValidTaskName(PTASKLIST tasklist, char* prompt, int maxLength) { //task
         taskname = getValidStringInput(prompt, maxLength);
         for (int stringIndex = 0; stringIndex < strlen(taskname); stringIndex++) {
             if (taskname[stringIndex] == ' ') {
-                printf("The name of the task cannot contain spaces. Please try again.\n");
-                invalidName = 1;
-                continue; //loop again, to ask for new name
+                taskname[stringIndex] = '_';
             }
         }
     } while (invalidName);

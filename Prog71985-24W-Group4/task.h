@@ -12,10 +12,9 @@ typedef struct task {
 	int priorityLevel;
 	char content[MAXCONTENT];
 	STATE state;
-	//time_t time;
 }TASK;
 
-TASK CreateTask(int priorityLevel, STATE state, char content[MAXCONTENT], char name[MAXNAME]);//, STATE state, time_t time);
+TASK CreateTask(int priorityLevel, STATE state, char content[MAXCONTENT], char name[MAXNAME]);
 
 TASK CopyTask(TASK src);
 
