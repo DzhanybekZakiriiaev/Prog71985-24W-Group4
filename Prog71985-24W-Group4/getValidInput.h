@@ -12,4 +12,4 @@
 char* getValidStringInput(char* prompt, int maxLength);
 int getValidInt(char* prompt, int minValue, int maxValue);
 enum state getValidState();
-char* getValidText(char* prompt, int maxLength);//task name cannot contain spaces or be same as another task
+char* getValidTaskName(char* prompt, int maxLength);//task name cannot contain spaces 

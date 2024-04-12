@@ -1,8 +1,20 @@
-TaskUpdated 4 in_progress
-Taskname
-New_task 4 in_progress
-It_is_a_new_task
-testing_add 4 closed
-new_task
-lalalal 4 in_progress
-my_day_was_fine
+test 4 in_progress
+tes detail
+teteete 4 not_started
+these are the details
+dishes 3 not_started
+
+water 4 not_started
+temp content
+trash 3 not_started
+temp content
+trash 3 closed
+temp content
+laundry 3 not_started
+temp content
+redo 2 not_started
+temp content
+names 2 not_started
+
+efe 4 in_progress
+433

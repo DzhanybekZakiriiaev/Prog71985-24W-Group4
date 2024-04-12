@@ -116,7 +116,7 @@ void taskManager() {
                         printf("\nAdding a new task...\n");
                         char* taskname;
                         do{
-                            taskname = getValidText("Enter the task name: ", MAXNAME);
+                            taskname = getValidTaskName("Enter the task name: ", MAXNAME);
                             if (SearchTaskByName(tasklist, taskname) != NULL) {
                                 printf("A task by that name already exists. Please try again and use a different name.\n");
                             }//keep looping until valid, unique name is entered
@@ -125,7 +125,7 @@ void taskManager() {
                         TASK task = CreateTask(
                             getValidInt("\nEnter the priority level of the task (1-5): ", MIN_PRIORITYLEVEL, MAX_PRIORITYLEVEL), 
                             getValidState(), 
-                            getValidText("\nEnter the tasks details: ", MAXCONTENT),
+                            getValidTaskName("\nEnter the tasks details: ", MAXCONTENT),
                             taskname);
                         Add(&tasklist, task);
                         printf("%s added to the tasklist. content: %s\n", task.name, task.content);
@@ -134,7 +134,7 @@ void taskManager() {
                     case 'b':
                         printf("\nDeleting a task...\n");
 
-                        TASK* taskToDelete = SearchTaskByName(tasklist, getValidText("Enter the name of the task you want to delete: ", MAXSTRINGLENGTH));
+                        TASK* taskToDelete = SearchTaskByName(tasklist, getValidTaskName("Enter the name of the task you want to delete: ", MAXSTRINGLENGTH));
 
                         if (taskToDelete == NULL) {
                             printf("Could not find a task by that name. Please try again.\n");
@@ -146,28 +146,32 @@ void taskManager() {
                         break;
                     case 'c':
                         printf("\nUpdating a task...\n");
-                        TASK* taskToUpdate = SearchTaskByName(tasklist, getValidText("Enter the name of the task to update: ", MAXSTRINGLENGTH));
-                        int updateChoice = getValidInt("\n1.Name\n2.Priority\n3.Content\n4.State\nEnter the number corresponding to the feild you'd like to update: ", 1, 4);
-                        switch (updateChoice) {
-                        case 1: 
-                            //update the name feild
-                            strcpy(taskToUpdate->name, getValidText("Enter the new name for the task: ", MAXNAME));
-                            break;
-                        case 2:
-                            //update the priority level
-                            taskToUpdate->priorityLevel = getValidInt("Enter the priority level of the task (1-5): ", MIN_PRIORITYLEVEL, MAX_PRIORITYLEVEL);
-                            break;
-                        case 3:
-                            //update the content
-                            strcpy(taskToUpdate->content, getValidStringInput("Enter the new content for the task: ", MAXCONTENT));
-                            break;
-                        case 4:
-                            //update the status 
-                            taskToUpdate->state = getValidState();
-                            break;
+                        TASK* taskToUpdate = SearchTaskByName(tasklist, getValidTaskName("Enter the name of the task to update:", MAXSTRINGLENGTH));
+                        if (taskToUpdate == NULL) {
+                            printf("Could not find a task by that name. Please try again.\n");
                         }
-    
-                        SaveTaskListToDiskFile(tasklist, TASKLISTFILE); //save before exiting
+                        else {
+                            int updateChoice = getValidInt("Enter the number corresponding to the feild you'd like to update:\n1.Name\n2.Priority\n3.Content\n4.State", 1, 4);
+                            switch (updateChoice) {
+                            case 1:
+                                //update the name feild
+                                strcpy(taskToUpdate->name, getValidTaskName("Enter the new name for the task: ", MAXNAME));
+                                break;
+                            case 2:
+                                //update the priority level
+                                taskToUpdate->priorityLevel = getValidInt("Enter the priority level of the task (1-10): ", MIN_PRIORITYLEVEL, MAX_PRIORITYLEVEL);
+                                break;
+                            case 3:
+                                //update the content
+                                strcpy(taskToUpdate->content, getValidStringInput("Enter the new content for the task: ", MAXCONTENT));
+                                break;
+                            case 4:
+                                //update the status 
+                                taskToUpdate->state = getValidState();
+                                break;
+                            }
+                            SaveTaskListToDiskFile(tasklist, TASKLISTFILE); //save before exiting
+                        }   
                         break;
                     default:
                         printf("\033[31mInvalid selection. Please choose a, b, c, or d.\n\033[0m");
@@ -282,7 +286,7 @@ void taskManager() {
         case 3:
             printf("\n\033[1;31mSEARCH TASK - Selected\n\033[0m");
 
-            TASK* taskToSearch = SearchTaskByName(tasklist, getValidText("Enter the name of the task you want to search for: ", MAXSTRINGLENGTH));
+            TASK* taskToSearch = SearchTaskByName(tasklist, getValidTaskName("Enter the name of the task you want to search for: ", MAXSTRINGLENGTH));
             if (taskToSearch == NULL) {
                 printf("Could not find a task by that name. Please try again.\n");
             }
@@ -302,3 +306,4 @@ void taskManager() {
         }
     }
 }
+

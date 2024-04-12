@@ -51,17 +51,14 @@ enum state getValidState() {
     
 }
  
-char* getValidText(char* prompt, int maxLength) { //task name cannot contain spaces
-    bool invalidName;
+//gets the task name from the user and replaces spaces with underscores (needed for LL to work correctly)
+char* getValidTaskName(char* prompt, int maxLength) { //task name cannot contain spaces
     char* taskname;
-    do {
-        invalidName = 0; 
         taskname = getValidStringInput(prompt, maxLength);
         for (int stringIndex = 0; stringIndex < strlen(taskname); stringIndex++) {
             if (taskname[stringIndex] == ' ') {
                 taskname[stringIndex] = '_';
             }
         }
-    } while (invalidName);
     return taskname;
 }
